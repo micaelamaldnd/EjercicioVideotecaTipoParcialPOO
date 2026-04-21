@@ -1,10 +1,11 @@
-# 📚 Sistema de Biblioteca en Java
+# 🎬 Sistema de Videoteca en Java
 
 ## 📌 Descripción
 
-Este proyecto consiste en un sistema sencillo de biblioteca desarrollado en Java, que permite gestionar libros mediante un menú por consola.
+Este proyecto consiste en un sistema de gestión de una videoteca desarrollado en Java.
+Permite administrar películas mediante un menú por consola, aplicando Programación Orientada a Objetos (POO) y una arquitectura en capas.
 
-El sistema permite cargar libros en memoria, consultarlos, modificarlos y aplicar distintas operaciones como préstamos y devoluciones.
+El sistema carga datos desde un archivo `.txt` y permite operar sobre ellos en memoria.
 
 ---
 
@@ -12,14 +13,15 @@ El sistema permite cargar libros en memoria, consultarlos, modificarlos y aplica
 
 El sistema permite:
 
-* ➕ Agregar un libro
-* 🔍 Buscar un libro por código
-* 📋 Listar todos los libros
-* 📖 Prestar un libro (cambia su estado a prestado)
-* 🔄 Devolver un libro (cambia su estado a disponible)
-* 📚 Mostrar solo los libros prestados
-* 🔢 Contar cuántos libros están prestados
-* 📅 Mostrar el libro más antiguo
+* ➕ Agregar una película
+* 🔍 Buscar una película por código
+* ❌ Eliminar una película
+* 📋 Listar todas las películas
+* 🎥 Alquilar una película (cambia a no disponible)
+* 🔄 Devolver una película (cambia a disponible)
+* 📂 Mostrar solo películas alquiladas
+* 🔢 Informar cuántas películas están alquiladas
+* 🕰️ Mostrar la película más antigua
 * 🚪 Salir del sistema
 
 ---
@@ -27,29 +29,40 @@ El sistema permite:
 ## 🧠 Conceptos aplicados
 
 * Programación Orientada a Objetos (POO)
+* Encapsulamiento (atributos privados + getters/setters)
 * Uso de `ArrayList`
-* Recorridos con `for`
-* Búsquedas con `equals()`
-* Filtros
-* Contadores
-* Búsqueda de mínimo (libro más antiguo)
-* Menú por consola con `Scanner`
+* Interfaces e implementación
+* Arquitectura en capas:
+
+  * Model
+  * Service
+  * Repository
+* Lectura de archivos (`BufferedReader`)
+* Manejo de excepciones (`try-catch`)
+* Entrada por consola con `Scanner`
+* Recorridos, filtros, contadores y búsqueda de mínimos
 
 ---
 
 ## 🧩 Estructura del proyecto
 
-```id="biblio1"
+```id="8eq2nx"
 src/
 │
 ├── model/
-│   └── Libro.java
+│   └── Pelicula.java
+│
+├── repository/
+│   └── LecturaArchivoRepository.java
+│
+├── repositoryImp/
+│   └── LecturaArchivoRepositoryImp.java
 │
 ├── service/
-│   └── GestionLibro.java
+│   └── PeliculaService.java
 │
-├── service/imp/
-│   └── GestionLibroImp.java
+├── serviceImp/
+│   └── PeliculaServiceImpl.java
 │
 └── inicio/
     └── Main.java
@@ -57,52 +70,58 @@ src/
 
 ---
 
-## 📄 Clase principal: Libro
+## 📄 Archivo de datos
 
-Cada libro contiene:
+El sistema utiliza un archivo:
 
-```id="biblio2"
-codigo
-titulo
-autor
-anioPublicacion
-prestado (boolean)
+```id="c0m9qc"
+peliculas.txt
 ```
 
-Incluye:
+### Formato:
 
-* Constructores
-* Getters y setters
-* Método `toString()`
+```id="4w1a4o"
+codigo,titulo,genero,anio,disponible
+```
+
+### Ejemplo:
+
+```id="vt9cbd"
+001,Avatar,Ciencia Ficcion,2009,true
+002,Titanic,Romance,1997,false
+003,Matrix,Accion,1999,true
+```
 
 ---
 
-## ▶️ Funcionamiento
+## ▶️ Ejecución
 
-1. Se ejecuta la clase `Main`
-2. Se muestra un menú por consola
-3. El usuario selecciona una opción
-4. El sistema realiza la operación sobre la lista de libros
+1. Ejecutar la clase `Main`
+2. El sistema carga automáticamente las películas desde el archivo
+3. Se muestra un menú por consola
+4. El usuario interactúa ingresando opciones
 
 ---
 
 ## ⚠️ Consideraciones
 
-* Los datos se almacenan en memoria (no persisten al cerrar el programa)
-* No se permiten operaciones sobre libros inexistentes
-* El estado del libro cambia según se preste o devuelva
+* Los datos se cargan desde el archivo al iniciar
+* Las modificaciones realizadas (altas, bajas, alquileres, etc.) **no se guardan automáticamente en el archivo**
+* El sistema trabaja en memoria durante la ejecución
 
 ---
 
 ## 🚀 Posibles mejoras
 
-* Guardar y cargar libros desde un archivo `.txt`
+* Guardar cambios en el archivo `.txt`
 * Validar códigos duplicados
-* Implementar eliminación de libros
-* Agregar interfaz gráfica
+* Manejo de errores más robusto
+* Implementar persistencia con base de datos
+* Crear una interfaz gráfica
 
 ---
 
 ## 👨‍💻 Autor
 
 Proyecto realizado como práctica para parcial de Programación Orientada a Objetos.
+
